@@ -3,6 +3,14 @@ var router = express.Router();
 var getDb = require('../getDb.js');
 var coon = require('../coon.js');
 router.get('/', function(req, res) {
+    //核心语法检验
+    if(!coon.lizhili(req.query)){
+        res.json({
+            type : 0,
+            message : '非法获取'
+        });
+    }
+
     var connection = getDb();
     connection.query(
         'insert into test (`name`) values (?);',
